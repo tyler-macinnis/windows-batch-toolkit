@@ -3,12 +3,14 @@ setlocal EnableExtensions EnableDelayedExpansion
 
 :: ============================================================
 :: Description   : Shows the disk size of every immediate subfolder in a target directory.
-:: Usage         : Edit TARGET_DIR, then run.
+:: Usage         : show-folder-sizes.bat [directory]
+::                 If no directory is provided, uses current directory.
 :: Requirements  : Windows CMD
 :: Notes         : Uses robocopy to calculate folder sizes. Large trees may take a moment.
 :: ============================================================
 
-set "TARGET_DIR=%USERPROFILE%"
+set "TARGET_DIR=%~1"
+if "%TARGET_DIR%"=="" set "TARGET_DIR=%CD%"
 
 if not exist "%TARGET_DIR%" (
     echo ERROR: Target folder does not exist: %TARGET_DIR%

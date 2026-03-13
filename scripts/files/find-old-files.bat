@@ -3,13 +3,17 @@ setlocal EnableExtensions
 
 :: ============================================================
 :: Description   : Lists files not modified in the last N days.
-:: Usage         : Edit TARGET_DIR and DAYS_OLD, then run directly.
+:: Usage         : find-old-files.bat [directory] [days]
+::                 If no directory is provided, uses current directory.
+::                 If no days value is provided, defaults to 90.
 :: Requirements  : Windows CMD, forfiles
-:: Notes         : Adjust DAYS_OLD to control the age threshold.
+:: Notes         : Adjust days parameter to control the age threshold.
 :: ============================================================
 
-set "TARGET_DIR=C:\TargetFolder"
-set "DAYS_OLD=90"
+set "TARGET_DIR=%~1"
+set "DAYS_OLD=%~2"
+if "%TARGET_DIR%"=="" set "TARGET_DIR=%CD%"
+if "%DAYS_OLD%"=="" set "DAYS_OLD=90"
 
 if not exist "%TARGET_DIR%" (
     echo ERROR: Target folder does not exist: %TARGET_DIR%

@@ -1,15 +1,19 @@
 @echo off
-setlocal EnableExtensions
+setlocal EnableExtensions EnableDelayedExpansion
 
 :: ============================================================
 :: Description   : Speaks any text you type using Windows text-to-speech.
-:: Usage         : Run directly and enter text at the prompt.
+:: Usage         : text-to-speech.bat [text]
+::                 If no text provided, prompts for input.
 :: Requirements  : Windows CMD, PowerShell
 :: Notes         : Special batch characters (& | < >) may cause issues in input.
 :: ============================================================
 
-set /P "MSG=Enter text to speak: "
-if "%MSG%"=="" (
+set "MSG=%*"
+if "!MSG!"=="" (
+    set /P "MSG=Enter text to speak: "
+)
+if "!MSG!"=="" (
     echo Nothing to say.
     pause
     exit /b 0

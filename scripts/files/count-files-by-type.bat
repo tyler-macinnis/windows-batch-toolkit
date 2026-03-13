@@ -3,12 +3,14 @@ setlocal EnableExtensions EnableDelayedExpansion
 
 :: ============================================================
 :: Description   : Counts files grouped by extension in a target folder.
-:: Usage         : Edit TARGET_DIR, then run.
+:: Usage         : count-files-by-type.bat [directory]
+::                 If no directory is provided, uses current directory.
 :: Requirements  : Windows CMD
 :: Notes         : Searches recursively. Counts files with no extension separately.
 :: ============================================================
 
-set "TARGET_DIR=%USERPROFILE%\Documents"
+set "TARGET_DIR=%~1"
+if "%TARGET_DIR%"=="" set "TARGET_DIR=%CD%"
 
 if not exist "%TARGET_DIR%" (
     echo ERROR: Target folder does not exist: %TARGET_DIR%

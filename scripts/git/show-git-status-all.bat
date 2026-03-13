@@ -3,12 +3,14 @@ setlocal EnableExtensions
 
 :: ============================================================
 :: Description   : Shows git status for every repo found under a root folder.
-:: Usage         : Edit ROOT_DIR, then run directly.
+:: Usage         : show-git-status-all.bat [directory]
+::                 If no directory is provided, uses current directory.
 :: Requirements  : Windows CMD, git
 :: Notes         : Only reports repos with uncommitted changes.
 :: ============================================================
 
-set "ROOT_DIR=C:\Projects"
+set "ROOT_DIR=%~1"
+if "%ROOT_DIR%"=="" set "ROOT_DIR=%CD%"
 
 if not exist "%ROOT_DIR%" (
     echo ERROR: Root folder does not exist: %ROOT_DIR%
