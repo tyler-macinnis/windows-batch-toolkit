@@ -28,6 +28,42 @@
 			],
 			"group": "build",
 			"problemMatcher": []
+		},
+		{
+			"label": "Launch Toolkit",
+			"type": "process",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"start",
+				"Windows Batch Toolkit",
+				"cmd.exe",
+				"/k",
+				"${workspaceFolder}\\scripts\\toolkit.bat"
+			],
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "never"
+			}
+		},
+		{
+			"label": "Launch Toolkit (Admin)",
+			"type": "process",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Start-Process",
+				"cmd.exe",
+				"-ArgumentList",
+				"'/k ${workspaceFolder}\\scripts\\toolkit.bat'",
+				"-Verb",
+				"RunAs"
+			],
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "never"
+			}
 		}
 	]
 }
