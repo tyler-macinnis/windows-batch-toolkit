@@ -2,11 +2,11 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Description   : Opens Advanced System Properties dialog.
+:: Description   : Opens Windows Event Viewer.
 :: Usage         : Run directly.
 :: Requirements  : Windows CMD
-:: Notes         : Access performance, user profiles, startup/recovery, and environment variables.
+:: Notes         : View system, application, and security logs.
 :: ============================================================
 
-start "" SystemPropertiesAdvanced.exe
+start "" eventvwr.msc
 exit /b 0

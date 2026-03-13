@@ -2,11 +2,11 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Description   : Opens Advanced System Properties dialog.
+:: Description   : Opens Windows Disk Management.
 :: Usage         : Run directly.
 :: Requirements  : Windows CMD
-:: Notes         : Access performance, user profiles, startup/recovery, and environment variables.
+:: Notes         : Manage disk partitions and volumes.
 :: ============================================================
 
-start "" SystemPropertiesAdvanced.exe
+start "" diskmgmt.msc
 exit /b 0

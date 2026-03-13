@@ -2,11 +2,11 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Description   : Opens Advanced System Properties dialog.
+:: Description   : Opens Windows Task Manager.
 :: Usage         : Run directly.
 :: Requirements  : Windows CMD
-:: Notes         : Access performance, user profiles, startup/recovery, and environment variables.
+:: Notes         : Shows running processes, performance, and startup apps.
 :: ============================================================
 
-start "" SystemPropertiesAdvanced.exe
+start "" taskmgr.exe
 exit /b 0

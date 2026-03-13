@@ -2,11 +2,11 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Description   : Opens Advanced System Properties dialog.
+:: Description   : Opens Windows Services management console.
 :: Usage         : Run directly.
 :: Requirements  : Windows CMD
-:: Notes         : Access performance, user profiles, startup/recovery, and environment variables.
+:: Notes         : View and manage Windows services.
 :: ============================================================
 
-start "" SystemPropertiesAdvanced.exe
+start "" services.msc
 exit /b 0

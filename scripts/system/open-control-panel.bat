@@ -2,11 +2,11 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Description   : Opens Advanced System Properties dialog.
+:: Description   : Opens the Windows Control Panel.
 :: Usage         : Run directly.
 :: Requirements  : Windows CMD
-:: Notes         : Access performance, user profiles, startup/recovery, and environment variables.
+:: Notes         : Classic Control Panel interface.
 :: ============================================================
 
-start "" SystemPropertiesAdvanced.exe
+start "" control
 exit /b 0

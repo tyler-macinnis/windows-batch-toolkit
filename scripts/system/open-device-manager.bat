@@ -2,11 +2,11 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Description   : Opens Advanced System Properties dialog.
+:: Description   : Opens Windows Device Manager.
 :: Usage         : Run directly.
 :: Requirements  : Windows CMD
-:: Notes         : Access performance, user profiles, startup/recovery, and environment variables.
+:: Notes         : Manage hardware devices and drivers.
 :: ============================================================
 
-start "" SystemPropertiesAdvanced.exe
+start "" devmgmt.msc
 exit /b 0

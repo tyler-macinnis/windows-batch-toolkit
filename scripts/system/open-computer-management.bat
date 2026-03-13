@@ -2,11 +2,11 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Description   : Opens Advanced System Properties dialog.
+:: Description   : Opens Windows Computer Management console.
 :: Usage         : Run directly.
 :: Requirements  : Windows CMD
-:: Notes         : Access performance, user profiles, startup/recovery, and environment variables.
+:: Notes         : Access disk, services, users, and event tools in one place.
 :: ============================================================
 
-start "" SystemPropertiesAdvanced.exe
+start "" compmgmt.msc
 exit /b 0
