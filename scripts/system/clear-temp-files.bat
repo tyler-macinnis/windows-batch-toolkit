@@ -2,12 +2,7 @@
 setlocal EnableExtensions EnableDelayedExpansion
 
 :: ============================================================
-:: Script Name   : clear-temp-files.bat
 :: Description   : Clears common temporary files from the current user temp directory.
-:: Author        : Tyler MacInnis
-:: Version       : 1.0.0
-:: Created       : 2026-03-12
-:: Updated       : 2026-03-12
 :: Usage         : Run directly to clear user temp files.
 :: Requirements  : Windows CMD
 :: Notes         : Some locked files may be skipped.

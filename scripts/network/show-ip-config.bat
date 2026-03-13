@@ -2,12 +2,7 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Script Name   : show-ip-config.bat
 :: Description   : Displays full IP configuration information and exports it to a text file.
-:: Author        : Tyler MacInnis
-:: Version       : 1.0.0
-:: Created       : 2026-03-12
-:: Updated       : 2026-03-12
 :: Usage         : Run directly to view and save IP config details.
 :: Requirements  : Windows CMD
 :: Notes         : Output file is written beside the script.

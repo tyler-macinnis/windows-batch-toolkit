@@ -2,15 +2,10 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Script Name   : git-cleanup.bat
-:: Description   : Runs common Git cleanup and refresh commands in the current repository.
-:: Author        : Tyler MacInnis
-:: Version       : 1.0.0
-:: Created       : 2026-03-12
-:: Updated       : 2026-03-12
+:: Description   : Shows a formatted recent commit log for the current repository.
 :: Usage         : Run inside a Git repository.
 :: Requirements  : Windows CMD, git
-:: Notes         : Does not delete local branches.
+:: Notes         : Displays the last 20 commits with graph decoration.
 :: ============================================================
 
 git rev-parse --is-inside-work-tree >nul 2>&1
@@ -20,16 +15,10 @@ if errorlevel 1 (
     exit /b 1
 )
 
-echo Fetching remotes...
-git fetch --all --prune
-
 echo.
-echo Repository status:
-git status
-
+echo Recent commits:
 echo.
-echo Recent branches:
-git branch -vv
+git log --oneline --graph --decorate --all -20
 
 echo.
 pause

@@ -2,12 +2,7 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Script Name   : show-system-info.bat
 :: Description   : Displays basic Windows system information.
-:: Author        : Tyler MacInnis
-:: Version       : 1.0.0
-:: Created       : 2026-03-12
-:: Updated       : 2026-03-12
 :: Usage         : Run directly to display system details.
 :: Requirements  : Windows CMD
 :: Notes         : Read-only informational script.

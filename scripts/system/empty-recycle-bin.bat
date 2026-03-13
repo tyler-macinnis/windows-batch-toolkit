@@ -2,12 +2,7 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Script Name   : empty-recycle-bin.bat
 :: Description   : Empties the Recycle Bin for all drives on the current user profile.
-:: Author        : Tyler MacInnis
-:: Version       : 1.0.0
-:: Created       : 2026-03-13
-:: Updated       : 2026-03-13
 :: Usage         : Run directly to permanently delete all recycled items.
 :: Requirements  : Windows CMD, PowerShell
 :: Notes         : This action is irreversible. Deleted items cannot be restored.

@@ -2,12 +2,7 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Script Name   : show-whoami-info.bat
 :: Description   : Displays detailed identity information for the current user.
-:: Author        : Tyler MacInnis
-:: Version       : 1.0.0
-:: Created       : 2026-03-13
-:: Updated       : 2026-03-13
 :: Usage         : Run directly to display user, group, and privilege details.
 :: Requirements  : Windows CMD
 :: Notes         : Read-only informational script.

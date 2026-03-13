@@ -2,12 +2,7 @@
 setlocal EnableExtensions
 
 :: ============================================================
-:: Script Name   : reset-network-stack.bat
 :: Description   : Resets key Windows network components for troubleshooting.
-:: Author        : Tyler MacInnis
-:: Version       : 1.0.0
-:: Created       : 2026-03-12
-:: Updated       : 2026-03-12
 :: Usage         : Run as administrator when resolving network issues.
 :: Requirements  : Windows CMD, Administrator privileges
 :: Notes         : A reboot may be required after running.

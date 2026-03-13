@@ -14,6 +14,20 @@
 			],
 			"group": "build",
 			"problemMatcher": []
+		},
+		{
+			"label": "Clean Generated Files from Scripts Directory",
+			"type": "process",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder}\\tools\\clean-scripts.ps1"
+			],
+			"group": "build",
+			"problemMatcher": []
 		}
 	]
 }
