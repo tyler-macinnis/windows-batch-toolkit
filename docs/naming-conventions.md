@@ -37,5 +37,6 @@ Use category-based names:
 - `files`
 - `dev`
 - `git`
+- `fun`
 - `installers`
 - `templates`

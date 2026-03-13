@@ -3,8 +3,8 @@
 ## Guidelines
 
 - Use lowercase dash-separated file names
-- Put scripts in the correct category folder
-- Include the standard batch script header
+- Put scripts in the correct category folder (`system`, `network`, `files`, `dev`, `git`, `fun`)
+- Include the standard batch script header (Description, Usage, Requirements, Notes)
 - Keep scripts focused on one purpose
 - Add comments for non-obvious logic
 - Avoid destructive actions unless clearly documented

@@ -6,7 +6,7 @@ A collection of useful Windows `.bat` scripts for administration, troubleshootin
 
 - Keep scripts simple and practical
 - Use a consistent structure and header format
-- Organize scripts by category
+- Organize scripts by category: `system`, `network`, `files`, `dev`, `git`, `fun`
 - Make scripts easy to run from VS Code
 - Support exporting all scripts into a single output folder
 
@@ -14,12 +14,7 @@ A collection of useful Windows `.bat` scripts for administration, troubleshootin
 
 Every batch file in this repository includes a standard header with:
 
-- Script Name
 - Description
-- Author
-- Version
-- Created
-- Updated
 - Usage
 - Requirements
 - Notes
