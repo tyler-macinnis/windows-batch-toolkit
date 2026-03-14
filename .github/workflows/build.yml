@@ -3,7 +3,7 @@ name: Build
 on:
   workflow_call:
     inputs:
-      os: 
+      os:
         required: true
         type: string
       artifact_name:
@@ -19,24 +19,39 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create README
+        shell: pwsh
         run: |
-          echo "Windows Batch Toolkit" > README.txt
-          echo "" >> README.txt
-          echo "Instructions:" >> README.txt
-          echo "1. Open the 'scripts' folder." >> README.txt
-          echo "2. Run the .bat file inside the folder." >> README.txt
-          echo "3. If prompted, run the script as Administrator." >> README.txt
+          @"
+          Instructions:
+          1. Open the scripts folder.
+          2. Run the .bat file inside.
+          3. Run as Administrator if required.
+          "@ | Out-File -FilePath "README.txt" -Encoding utf8
 
-      - name: Prepare package
+      - name: Stage package files
+        shell: pwsh
         run: |
-          mkdir package
-          cp -r scripts package/scripts
-          cp README.txt package/README.txt
+          $stagingDir = Join-Path $env:RUNNER_TEMP "release-package"
+
+          if (Test-Path $stagingDir) {
+            Remove-Item -Recurse -Force $stagingDir
+          }
+
+          New-Item -ItemType Directory -Path $stagingDir | Out-Null
+          Copy-Item -Path "scripts" -Destination (Join-Path $stagingDir "scripts") -Recurse
+          Copy-Item -Path "README.txt" -Destination (Join-Path $stagingDir "README.txt")
 
       - name: Create zip
+        shell: pwsh
         run: |
-          cd package
-          zip -r ../${{ inputs.artifact_name }}.zip .
+          $stagingDir = Join-Path $env:RUNNER_TEMP "release-package"
+          $zipPath = Join-Path $env:GITHUB_WORKSPACE "${{ inputs.artifact_name }}.zip"
+
+          if (Test-Path $zipPath) {
+            Remove-Item -Force $zipPath
+          }
+
+          Compress-Archive -Path (Join-Path $stagingDir "*") -DestinationPath $zipPath
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
