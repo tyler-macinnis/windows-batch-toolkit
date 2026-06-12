@@ -1,3 +1,4 @@
+<# : batch portion
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
@@ -7,8 +8,9 @@ setlocal EnableExtensions EnableDelayedExpansion
 ::                   convert-number.bat dec 255
 ::                   convert-number.bat hex FF
 ::                   convert-number.bat bin 11111111
-:: Requirements  : Windows CMD, PowerShell
-:: Notes         : Supports endianness conversion for hex values.
+:: Requirements  : Windows CMD, Windows PowerShell 5.1
+:: Notes         : Supports endianness conversion for hex values. The PowerShell
+::                 code is embedded below and run from this .bat file.
 :: ============================================================
 
 set "INPUT_FORMAT=%~1"
@@ -96,85 +98,84 @@ echo   Input: %INPUT_VALUE% (%INPUT_FORMAT%)
 echo ============================================================
 echo.
 
-:: Create temp PowerShell script
-set "PS_SCRIPT=%TEMP%\convert-number-%RANDOM%.ps1"
-
-(
-echo $inputFormat = '%INPUT_FORMAT%'.ToLower^(^)
-echo $inputValue = '%CLEAN_VALUE%'
-echo.
-echo try {
-echo     switch ^($inputFormat^) {
-echo         'dec' { $decimal = [int64]$inputValue }
-echo         'bin' { $decimal = [Convert]::ToInt64^($inputValue, 2^) }
-echo         'oct' { $decimal = [Convert]::ToInt64^($inputValue, 8^) }
-echo         'hex' { $decimal = [Convert]::ToInt64^($inputValue, 16^) }
-echo     }
-echo.
-echo     $binary = [Convert]::ToString^($decimal, 2^)
-echo     $octal = [Convert]::ToString^($decimal, 8^)
-echo     $hex = [Convert]::ToString^($decimal, 16^).ToUpper^(^)
-echo.
-echo     Write-Host "Decimal:      $decimal"
-echo     Write-Host "Binary:       $binary"
-echo     Write-Host "Octal:        $octal"
-echo     Write-Host "Hexadecimal:  $hex"
-echo     Write-Host ""
-echo     Write-Host "With Prefixes:"
-echo     Write-Host "  Binary:     0b$binary"
-echo     Write-Host "  Octal:      0$octal"
-echo     Write-Host "  Hex:        0x$hex"
-echo.
-echo     # Endianness for hex ^(only if 2+ bytes^)
-echo     if ^($hex.Length -ge 2^) {
-echo         $paddedHex = if ^($hex.Length %% 2 -ne 0^) { '0' + $hex } else { $hex }
-echo         $bytes = @^(^)
-echo         for ^($i = 0; $i -lt $paddedHex.Length; $i += 2^) {
-echo             $bytes += $paddedHex.Substring^($i, 2^)
-echo         }
-echo         $bigEndian = $bytes -join ' '
-echo         $littleEndian = ^($bytes[^($bytes.Length-1^)..0]^) -join ' '
-echo         Write-Host ""
-echo         Write-Host "Byte Order:"
-echo         Write-Host "  Big Endian:     $bigEndian"
-echo         Write-Host "  Little Endian:  $littleEndian"
-echo         $beCompact = $bytes -join ''
-echo         $leCompact = ^($bytes[^($bytes.Length-1^)..0]^) -join ''
-echo         Write-Host "  BE (compact):   $beCompact"
-echo         Write-Host "  LE (compact):   $leCompact"
-echo     }
-echo.
-echo     # Character representation ^(if printable ASCII^)
-echo     if ^($decimal -ge 32 -and $decimal -le 126^) {
-echo         Write-Host ""
-echo         Write-Host "ASCII Char:   $^([char]$decimal^)"
-echo     }
-echo.
-echo     # Signed interpretation
-echo     Write-Host ""
-echo     Write-Host "Signed Interpretation:"
-echo     if ^($decimal -le 255^) {
-echo         $signed8 = if ^($decimal -gt 127^) { $decimal - 256 } else { $decimal }
-echo         Write-Host "  8-bit:      $signed8"
-echo     }
-echo     if ^($decimal -le 65535^) {
-echo         $signed16 = if ^($decimal -gt 32767^) { $decimal - 65536 } else { $decimal }
-echo         Write-Host "  16-bit:     $signed16"
-echo     }
-echo     if ^($decimal -le 4294967295^) {
-echo         $signed32 = if ^($decimal -gt 2147483647^) { $decimal - 4294967296 } else { $decimal }
-echo         Write-Host "  32-bit:     $signed32"
-echo     }
-echo.
-echo } catch {
-echo     Write-Host "Error: Invalid input value for the specified format." -ForegroundColor Red
-echo     Write-Host $_.Exception.Message
-echo     exit 1
-echo }
-) > "!PS_SCRIPT!"
-
-powershell -NoProfile -ExecutionPolicy Bypass -File "!PS_SCRIPT!"
-del "!PS_SCRIPT!" 2>nul
+:: Run the embedded PowerShell code below (no temp .ps1 files needed)
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (Get-Content -Raw '%~f0')"
 
 echo.
-exit /b 0
+exit /b %ERRORLEVEL%
+
+: end batch / begin PowerShell #>
+
+# Number conversion - embedded PowerShell (Windows PowerShell 5.1 compatible)
+# Inputs are passed from the batch portion via environment variables.
+$inputFormat = "$env:INPUT_FORMAT".ToLower()
+$inputValue = "$env:CLEAN_VALUE"
+
+try {
+    switch ($inputFormat) {
+        'dec' { $decimal = [int64]$inputValue }
+        'bin' { $decimal = [Convert]::ToInt64($inputValue, 2) }
+        'oct' { $decimal = [Convert]::ToInt64($inputValue, 8) }
+        'hex' { $decimal = [Convert]::ToInt64($inputValue, 16) }
+    }
+
+    $binary = [Convert]::ToString($decimal, 2)
+    $octal = [Convert]::ToString($decimal, 8)
+    $hex = [Convert]::ToString($decimal, 16).ToUpper()
+
+    Write-Host "Decimal:      $decimal"
+    Write-Host "Binary:       $binary"
+    Write-Host "Octal:        $octal"
+    Write-Host "Hexadecimal:  $hex"
+    Write-Host ""
+    Write-Host "With Prefixes:"
+    Write-Host "  Binary:     0b$binary"
+    Write-Host "  Octal:      0$octal"
+    Write-Host "  Hex:        0x$hex"
+
+    # Endianness for hex (only if 2+ bytes)
+    if ($hex.Length -ge 2) {
+        $paddedHex = if ($hex.Length % 2 -ne 0) { '0' + $hex } else { $hex }
+        $bytes = @()
+        for ($i = 0; $i -lt $paddedHex.Length; $i += 2) {
+            $bytes += $paddedHex.Substring($i, 2)
+        }
+        $bigEndian = $bytes -join ' '
+        $littleEndian = ($bytes[($bytes.Length-1)..0]) -join ' '
+        Write-Host ""
+        Write-Host "Byte Order:"
+        Write-Host "  Big Endian:     $bigEndian"
+        Write-Host "  Little Endian:  $littleEndian"
+        $beCompact = $bytes -join ''
+        $leCompact = ($bytes[($bytes.Length-1)..0]) -join ''
+        Write-Host "  BE (compact):   $beCompact"
+        Write-Host "  LE (compact):   $leCompact"
+    }
+
+    # Character representation (if printable ASCII)
+    if ($decimal -ge 32 -and $decimal -le 126) {
+        Write-Host ""
+        Write-Host "ASCII Char:   $([char]$decimal)"
+    }
+
+    # Signed interpretation
+    Write-Host ""
+    Write-Host "Signed Interpretation:"
+    if ($decimal -le 255) {
+        $signed8 = if ($decimal -gt 127) { $decimal - 256 } else { $decimal }
+        Write-Host "  8-bit:      $signed8"
+    }
+    if ($decimal -le 65535) {
+        $signed16 = if ($decimal -gt 32767) { $decimal - 65536 } else { $decimal }
+        Write-Host "  16-bit:     $signed16"
+    }
+    if ($decimal -le 4294967295) {
+        $signed32 = if ($decimal -gt 2147483647) { $decimal - 4294967296 } else { $decimal }
+        Write-Host "  32-bit:     $signed32"
+    }
+
+} catch {
+    Write-Host "Error: Invalid input value for the specified format." -ForegroundColor Red
+    Write-Host $_.Exception.Message
+    exit 1
+}

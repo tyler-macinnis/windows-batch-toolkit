@@ -8,6 +8,10 @@
 - Keep scripts focused on one purpose
 - Add comments for non-obvious logic
 - Avoid destructive actions unless clearly documented
+- Write scripts as `.bat` files; do not add standalone `.ps1` files
+- If PowerShell is needed, call it from within the `.bat` file (inline
+  `powershell -Command` or an embedded `<# : ... #>` hybrid section) and keep
+  it Windows PowerShell 5.1 compatible
 
 ## Recommended Workflow
 
