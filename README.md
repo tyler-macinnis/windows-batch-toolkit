@@ -27,14 +27,14 @@ its requirements, and any important notes.
 
 ## Categories
 
-| Category  | Description                                                   |
-|-----------|---------------------------------------------------------------|
-| `system`  | System info, cleanup, services, power plans, repairs          |
+| Category | Description |
+| --- | --- |
+| `system` | System info, cleanup, services, power plans, repairs |
 | `network` | IP config, ports, WiFi, DNS, hosts file, ping sweep, traceroute |
-| `files`   | Backup, large files, old files, folder sizes, directory trees |
-| `dev`     | Base64, hashing, GUIDs, number conversion, PATH export        |
-| `git`     | Status, branches, logs, pull all repos, undo commits          |
-| `fun`     | Matrix rain, text-to-speech, magic 8-ball, daily briefing, and more |
+| `files` | Backup, large files, old files, folder sizes, directory trees |
+| `dev` | Base64, hashing, GUIDs, number conversion, PATH export |
+| `git` | Status, branches, logs, pull all repos, undo commits |
+| `fun` | Matrix rain, text-to-speech, magic 8-ball, daily briefing, and more |
 
 Scripts live under `scripts/<category>/`. A starter template is available at
 `scripts/templates/script-template.bat`.
