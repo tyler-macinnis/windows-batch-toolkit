@@ -99,7 +99,7 @@ echo ============================================================
 echo.
 
 :: Run the embedded PowerShell code below (no temp .ps1 files needed)
-powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (${%~f0} | Out-String)"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (Get-Content -Raw '%~f0')"
 
 echo.
 exit /b %ERRORLEVEL%

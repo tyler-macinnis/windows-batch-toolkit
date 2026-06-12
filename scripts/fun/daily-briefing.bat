@@ -10,7 +10,7 @@ setlocal EnableExtensions
 ::                 code is embedded below and run from this .bat file.
 :: ============================================================
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (${%~f0} | Out-String)"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (Get-Content -Raw '%~f0')"
 
 pause
 exit /b 0
