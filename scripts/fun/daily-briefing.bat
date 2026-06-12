@@ -1,5 +1,23 @@
-# Daily Briefing - PowerShell Backend
-# Called by daily-briefing.bat
+<# : batch portion
+@echo off
+setlocal EnableExtensions
+
+:: ============================================================
+:: Description   : Daily briefing script with system info, weather, and fun facts.
+:: Usage         : Run directly to see your daily summary.
+:: Requirements  : Windows CMD, Windows PowerShell 5.1, Internet connection
+:: Notes         : Uses free APIs for weather and fun facts. The PowerShell
+::                 code is embedded below and run from this .bat file.
+:: ============================================================
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (${%~f0} | Out-String)"
+
+pause
+exit /b 0
+
+: end batch / begin PowerShell #>
+
+# Daily Briefing - embedded PowerShell (Windows PowerShell 5.1 compatible)
 
 $ErrorActionPreference = 'SilentlyContinue'
 
