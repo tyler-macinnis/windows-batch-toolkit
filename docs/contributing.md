@@ -15,7 +15,7 @@
 2. Rename it for the new script
 3. Update the header
 4. Implement the logic
-5. Test locally
+5. Test it on Windows to verify it works as described
 6. Update `README.md` if needed
 
 ## Style Notes
