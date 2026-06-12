@@ -1,24 +1,29 @@
-# Windows Batch Toolkit
+# Windows Batch Scripts
 
-A collection of portable Windows batch scripts for system administration, networking, development, and automation. No installation required — just run.
+A simple, curated collection of useful Windows batch (`.bat`) scripts, organized
+into a few categories. There is no installer, menu, or build step — just open a
+folder and run the script you need.
 
-## Features
+## How to Use
 
-- **50+ ready-to-use scripts** organized by category
-- **Interactive menu** (`toolkit.bat`) to browse and run scripts
-- **Command-line friendly** — all scripts accept optional arguments
-- **Zero dependencies** — pure batch, runs on any Windows machine
-
-## Quick Start
+Run any script directly from File Explorer (double-click) or from a command
+prompt:
 
 ```bat
-:: Launch the interactive menu
-scripts\toolkit.bat
-
-:: Or run any script directly
+:: Run a script
 scripts\system\show-system-info.bat
+
+:: Many scripts accept optional arguments
 scripts\files\list-large-files.bat C:\Downloads 50
+scripts\files\find-old-files.bat "C:\Projects" 30
 ```
+
+Some scripts need an elevated prompt. If a script reports that it requires
+administrator rights, right-click it and choose **Run as administrator**, or
+launch it from an elevated command prompt.
+
+Each script begins with a short header describing what it does, how to run it,
+its requirements, and any important notes.
 
 ## Categories
 
@@ -31,24 +36,15 @@ scripts\files\list-large-files.bat C:\Downloads 50
 | `git`     | Status, branches, logs, pull all repos, undo commits          |
 | `fun`     | Matrix rain, text-to-speech, magic 8-ball, and more           |
 
-## Usage
+Scripts live under `scripts/<category>/`. A starter template is available at
+`scripts/templates/script-template.bat`.
 
-Most scripts work out of the box. Many accept optional arguments:
+## Docs
 
-```bat
-:: Use current directory
-scripts\files\find-old-files.bat
-
-:: Or specify a path and parameters
-scripts\files\find-old-files.bat "C:\Projects" 30
-```
-
-Run `toolkit.bat` for an interactive menu with pagination and argument prompts.
-
-## Contributing
-
-See [docs/contributing.md](docs/contributing.md) for guidelines.
+- [Contributing](docs/contributing.md)
+- [Naming conventions](docs/naming-conventions.md)
+- [Script template](docs/script-template.md)
 
 ## License
 
-MIT
+[MIT](LICENSE)
