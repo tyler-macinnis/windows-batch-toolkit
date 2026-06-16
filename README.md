@@ -50,6 +50,10 @@ PowerShell 5.1 for maximum compatibility.
 - [Naming conventions](docs/naming-conventions.md)
 - [Script template](docs/script-template.md)
 
+## Reference Repositories
+
+- [windows11-scripts](https://github.com/shoober420/windows11-scripts/tree/main)
+
 ## License
 
 [MIT](LICENSE)
