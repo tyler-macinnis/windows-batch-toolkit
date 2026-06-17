@@ -39,6 +39,31 @@ its requirements, and any important notes.
 Scripts live under `scripts/<category>/`. A starter template is available at
 `scripts/templates/script-template.bat`.
 
+## Submodules
+
+Use `submodules/` at the repository root for external script collections you
+want to include as Git submodules.
+
+Example:
+
+```bat
+git submodule add https://github.com/<owner>/<repo>.git submodules/<repo-name>
+git submodule update --init --recursive
+```
+
+To check whether configured submodules in `.gitmodules` have remote updates
+available, run:
+
+```bat
+check-submodule-updates.bat
+```
+
+You can also filter to a specific folder path (relative to repo root):
+
+```bat
+check-submodule-updates.bat third-party
+```
+
 Everything in this toolkit is a `.bat` file. When a script needs PowerShell,
 the PowerShell code is embedded in (or invoked inline from) the `.bat` file
 itself — there are no standalone `.ps1` files — and it targets Windows
