@@ -136,21 +136,21 @@ exit /b 0
 echo ==================================================
 echo Summary:
 echo   Repos found:   %REPOS_FOUND%
-echo   Updated:       %REPOS_UPDATED%
 echo   Up to date:    %REPOS_UP_TO_DATE%
+echo   Updated:       %REPOS_UPDATED%
 echo   Skipped:       %REPOS_SKIPPED%
 echo ==================================================
-echo.
-echo Updated repos:
-if !REPOS_UPDATED! GTR 0 (
-    for /L %%I in (1,1,!REPOS_UPDATED!) do call echo   %%UPDATED_REPO_%%I%%
-) else (
-    echo   None
-)
 echo.
 echo Up-to-date repos:
 if !REPOS_UP_TO_DATE! GTR 0 (
     for /L %%I in (1,1,!REPOS_UP_TO_DATE!) do call echo   %%UP_TO_DATE_REPO_%%I%%
+) else (
+    echo   None
+)
+echo.
+echo Updated repos:
+if !REPOS_UPDATED! GTR 0 (
+    for /L %%I in (1,1,!REPOS_UPDATED!) do call echo   %%UPDATED_REPO_%%I%%
 ) else (
     echo   None
 )
